@@ -1,0 +1,48 @@
+{% extends "gestion/index.html" %}
+
+{% load static %}
+{% block css %}{% endblock %}
+
+{% block content %}
+<div id="contenedor">
+    <div class="top">
+    <h3>ZONAS DE REPARTO | pediapp</h3>
+    <a class="btn btn-primary" href="{% url 'NuevaZona' %}" role="button">Nueva zona</a></div>
+    <hr>
+	<table id="myTable" class="display">
+	    <thead>
+		<tr>
+		<th>Nombre</th>
+		<th>Descripcion</th>
+		<th>Precio</th>
+        <th>Disponible</th>
+        <th>Acciones</th>
+		</tr>
+		</thead>
+		<tbody>
+            {% for zona in zonas %}
+            <tr>
+                <td>{{ zona.nombre_zona }}</td>
+                <td>{{ zona.descripcion_zona }}</td>
+                <td>{{ zona.costo }}</td>
+                <td>{% if zona.disponible %}Sí{% else %}No{% endif %}</td>
+                <td>
+                    <a href="{% url 'update_zon' pk=zona.id %}">Editar</a>
+                    |
+                    <a href="{% url 'delete_zon' pk=zona.id %}">Eliminar</a>
+                </td>
+            </tr>
+        {% endfor %}
+		</tbody>
+		
+	</table>
+</div>
+
+<script>
+    $(document).ready( function () {
+    $('#myTable').DataTable();
+    } );
+</script>
+
+
+{% endblock  %}

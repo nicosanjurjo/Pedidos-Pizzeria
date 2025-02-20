@@ -1,0 +1,100 @@
+.habilitar, .deshabilitar {
+    height: 70px;
+    width: 150px;
+    font-size: 16px;
+}
+
+.stock {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.stock span {
+    text-align: center;
+    background: #0DCAF0;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.top-controls {
+    margin-bottom: 40px;
+}
+
+@keyframes titilar {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+#notificacionpedidos {
+    background-color: #ffeb36;
+    color: black;
+    text-decoration: underline;
+    animation: titilar 1s infinite; 
+    border-radius: 10px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+    font-weight: bold; 
+}
+
+.nuevo-pedido {
+
+    background-color: #ffeb36 !important; 
+    animation: fadeIn 1s ease; 
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.dataTables_wrapper .dataTables_filter,
+.dataTables_wrapper .dataTables_length {
+    margin-bottom: 15px !important;
+}
+
+.table {
+    width: 100%;
+}
+
+.dataTables_wrapper .top-controls {
+    margin-bottom: 20px;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: #f9f9f9;
+}
+
+.modal-header {
+    background-color: #007bff;
+    color: white;
+}
+
+.modal-footer .btn-primary {
+    background-color: #007bff;
+}
+
+@media (max-width: 768px) {
+    .top-controls {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .on-off {
+        margin-bottom: 10px;
+    }
+}
+
+@media (min-width: 992px) {
+    .top-controls {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+    }
+}

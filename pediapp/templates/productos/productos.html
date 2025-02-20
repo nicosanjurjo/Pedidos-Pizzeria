@@ -1,0 +1,52 @@
+{% extends "gestion/index.html" %}
+{% load static %}
+{% block title %}GESTIÓN DE PRODUCTOS{% endblock title %}
+{% block css %}{% endblock %}
+
+{% block content %}
+
+<div id="contenedor">
+    <div class="top">
+    <h3>PRODUCTOS | pediapp</h3>
+    <a class="btn btn-primary" style="margin-right: 15px" href="{% url 'NuevoProducto' %}" role="button">Nuevo producto</a></div>
+    <hr style="margin-top: -3px">
+	<table id="myTable" class="display">
+	    <thead>
+		<tr>
+        <th>Categoria</th>
+		<th>Nombre</th>
+		<th>Descripcion</th>
+		<th>Precio</th>
+        <th>Disponible</th>
+        <th>Acciones</th>
+		</tr>
+		</thead>
+		<tbody>
+            {% for producto in productos %}
+            <tr>
+                <td>{{ producto.categoria }}</td>
+                <td>{{ producto.nombre }}</td>
+                <td>{{ producto.descripcion }}</td>
+                <td>{{ producto.precio }}</td>
+                <td>{% if producto.disponible %}Sí{% else %}No{% endif %}</td>
+                <td>
+                    <a href="{% url 'update_pro' pk=producto.id %}">Editar</a>
+                    |
+                    <a href="{% url 'delete_pro' pk=producto.id %}">Eliminar</a>
+                </td>
+            </tr>
+        {% endfor %}
+		</tbody>
+		
+	</table>
+
+</div>
+
+<script>
+    $(document).ready( function () {
+    $('#myTable').DataTable();
+    } );
+</script>
+
+
+{% endblock  %}

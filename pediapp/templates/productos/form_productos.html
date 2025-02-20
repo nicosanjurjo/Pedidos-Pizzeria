@@ -1,0 +1,17 @@
+{% extends "gestion/index.html" %}
+{% load static %}
+{% block title %}Productos | Formulario{% endblock title %}
+
+{% block css %}{% endblock %}
+
+{% block content %}
+<div id="contenedor">
+<h3>Crear o editar producto</h3>
+
+    <form class="row g-3 mt-3" action="" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Guardar">
+    </form>
+</div>
+{% endblock content %}

@@ -1,0 +1,19 @@
+{% extends "gestion/index.html" %}
+{% load static %}
+{% block title %}Productos | Confirmar eliminacion{% endblock title %}
+{% block css %}
+{% endblock %}
+
+{% block content %}
+    <div id="contenedor">
+        <h1>Confirmar eliminación</h1>
+        <p>¿Estás seguro de que deseas eliminar el producto "{{ producto }}"?</p>
+    
+        <form method="post" action="">
+        {% csrf_token %}
+        <input type="submit" value="Eliminar"> </form>
+
+        <a href='/zonas/'>Cancelar</a>
+    </div>
+
+{% endblock %}

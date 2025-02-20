@@ -1,0 +1,148 @@
+html, body {
+  height: 100%; /* Ocupar el 100% de la altura de la ventana */
+  margin: 0; /* Eliminar márgenes por defecto */
+}
+
+.offcanvas-title img {
+  width: 150px; 
+  height: 150px;
+
+}
+
+.navbar {
+  background-color: #fff;
+  height: 50px;
+  margin: 5px;
+  border-radius: 16px;
+  padding: 0.5rem;
+}
+
+.navbar-toggler {
+  border: none;
+  font-size: 1.25rem;
+}
+
+.nav-link {
+  color: #666777;
+  font-weight: 500;
+  position: relative;
+}
+
+.nav-link::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0%;
+  height: 2px;
+  background-color: #de0404d4;
+  visibility: hidden;
+  transition: 0.3s ease-in-out;
+}
+
+.nav-link:hover::before, .nav-link.active::before {
+  width: 100%;
+  visibility: visible;
+}
+
+.top {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+
+body {
+  display: flex; /* Usar flexbox para el layout */
+  flex-direction: column; /* Alinear los elementos en columna */
+  background-color: rgba(78, 11, 11, 0.6);
+  margin: 5px;
+}
+
+footer {
+  margin-top: 10px;
+  padding: 10px;
+  width: 100%;
+  border-radius: 5px;
+  background-color: rgb(255, 240, 240);
+  text-align: center;
+
+}
+
+#contenedor {
+  flex: 1; /* Permitir que el contenedor principal crezca y empuje el footer hacia abajo */
+  margin: 20px 10px; /* Ajustar márgenes */
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+#contenedor_formulario {
+  margin-top: 80px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Asegúrate de que el contenedor principal sea flexible */
+#contenedor {
+  overflow-x: auto;
+  padding: 10px;
+}
+
+.container-fluid {
+  padding: 0;
+}
+
+/* Asegúrate de que la tabla se ajuste al contenedor */
+#myTable {
+  width: 100%;
+  max-width: 100%;
+  table-layout: auto;
+}
+
+/* Ajusta las celdas de la tabla para que se envuelvan en pantallas pequeñas */
+#myTable th, #myTable td {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Habilita el desplazamiento horizontal en pantallas pequeñas */
+@media (max-width: 768px) {
+  #myTable {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  
+  #myTable th {
+    background: #f8f8f8;
+  }
+  
+  #myTable td {
+    border-top: 1px solid #e9ecef;
+  }
+
+  .on-off {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .on-off button {
+    margin-bottom: 10px;
+  }
+
+  #contenedor {
+    flex: 1; /* Permitir que el contenedor principal crezca y empuje el footer hacia abajo */
+    margin: 5px; /* Ajustar márgenes */
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  }
+}

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmar Pedido</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/formcliente_styles.css' %}">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="{% static 'js/form_cliente.js' %}"></script>
+</head>
+<body>
+    <div class="container my-5">
+        <header class="text-center mb-4">
+            <h1 class="h3">Confirmar pedido</h1>
+        </header>
+
+        <main>
+            <section class="order-summary mb-4">
+                <h2 class="h4 mb-3">Resumen del pedido</h2>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Categoría</th>
+                                <th>Variedad</th>
+                                <th>Precio</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabla-productos">
+                            <!-- Los productos se llenarán dinámicamente con JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="opciones">
+                    <a class="btn btn-primary volver" style="margin-top: 10px" href="{% url 'Cliente' %}">Agregar más productos</a>
+                </div>
+            </section>
+
+            <section class="order-form">
+                <h2 class="h4 mb-3">Detalles del pedido</h2>
+                <div class="card p-4">
+                    <form id="formulario-pedido">
+                        <div class="mb-3">
+                            <label for="clienteNombre" class="form-label">Nombre</label>
+                            <input type="text" class="form-control" id="clienteNombre" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="clienteTelefono" class="form-label">Teléfono sin 0 ni 15 (Por ejemplo "2657111111")</label>
+                            <input type="tel" class="form-control" id="clienteTelefono" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="confirmarTelefono" class="form-label">Repetir teléfono</label>
+                            <input type="tel" class="form-control" id="confirmarTelefono" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="horario" class="form-label">Horario</label>
+                            <select class="form-select" id="horario" required>
+                                <option value="" disabled selected>Seleccione un horario</option>
+                                {% for turno in turnos %}
+                                    <option value="{{ turno.id }}">{{ turno.horario }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox" id="cuandoEsteLista" checked>
+                            <label class="form-check-label" for="cuandoEsteLista">
+                                Cuando esté lista
+                            </label>
+                        </div>
+                        <div class="mb-3">
+                            <label for="medioPago" class="form-label">Medio de pago:</label>
+                            <select class="form-select" id="medioPago">
+                                {% for medio, display in medios %}
+                                    <option value="{{ medio }}">{{ display }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="metodoEntrega" id="retiroLocal" value="retiro" checked>
+                                <label class="form-check-label" for="retiroLocal">Retiro en Local (Uruguay 4512)</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="metodoEntrega" id="delivery" value="envio">
+                                <label class="form-check-label" for="delivery">Envío a domicilio</label>
+                            </div>
+                        </div>
+                        <div id="zonas-envio" class="d-none mt-4">
+                            <h3 class="h5">Selecciona tu zona de envío y especificá tu dirección</h3>
+                            <div class="row">
+                                {% for zona in zonas %}
+                                <div class="col-md-4 mb-3">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h4 class="card-title h6">{{ zona.nombre_zona }}</h4>
+                                            <p class="card-text">{{ zona.descripcion_zona }}</p>
+                                            <p class="zona-costo">Costo: ${{ zona.costo }}</p>
+                                            <button type="button" class="btn btn-primary seleccionar-zona" data-zona-id="{{ zona.id }}" data-zona-costo="{{ zona.costo }}">Seleccionar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                            <div class="mb-3">
+                                <label for="clienteDireccion" class="form-label">Dirección</label>
+                                <input type="text" class="form-control" id="clienteDireccion" required>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="observaciones" class="form-label">Observaciones:</label>
+                            <textarea class="form-control" id="observaciones" rows="2" placeholder="Escribe tus observaciones aquí..."></textarea>
+                        </div>
+                        <h3 class="h5" id="totalCarrito">Total: $<span id="total-amount">0.00</span></h3>
+                        <button type="submit" class="btn btn-success confirmado">Confirmar Pedido</button>
+                        <a class="btn btn-danger cancelar" href="{% url 'Cliente' %}">Cancelar pedido</a>
+                    </form>
+                </div>
+            </section>
+        </main>
+
+        <!-- Modal de confirmación -->
+        <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 class="modal-title h5" id="successModalLabel">¡Listo! Ya empezamos a preparar tu pedido</h2>
+                    </div>
+                    <div class="modal-body text-center">
+                        <img src="{% static 'img/check.png' %}" alt="Check" class="mb-3" style="width: 50px;">
+                        <p id="modal-detalles"></p>
+                        <p>¡Muchas gracias por elegirnos!</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id="closeModalBtn">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="text-center mt-5">
+        <p>Desarrollado y diseñado por &copy;2024 DesarrolloCriollo.</p>
+        <p>Instagram: desarrollocriollo</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

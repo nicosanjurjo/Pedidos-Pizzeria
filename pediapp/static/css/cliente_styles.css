@@ -1,0 +1,219 @@
+body {
+    font-family: 'Gill Sans', 'Gill Sans MT', 'Calibri', 'Trebuchet MS', sans-serif;
+    background-color: #272727;
+    color: #ffffff;
+}
+
+header {
+    text-align: center;
+    padding: 20px 0;
+}
+
+#logo {
+    width: 300px;
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+header h5 p {
+    margin-bottom: 5px;
+}
+
+/* Reducir margen inferior del carrusel */
+#carouselExample {
+    margin-bottom: 0 !important; /* Elimina cualquier margen extra debajo del carrusel */
+}
+
+
+.carousel-item img {
+    max-height: 500px;  /* Altura máxima en pantallas grandes */
+    height: 100%; /* Mantiene la imagen en el 100% del contenedor */
+    object-fit: cover;  /* Asegura que la imagen llene el área del carrusel */
+    width: 100%;
+}
+
+.carousel-caption {
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
+    padding: 5px 10px; /* Controla el espacio interno del texto */
+    border-radius: 5px;
+    margin-bottom: 10px; /* Reduce el margen inferior */
+}
+
+.carousel-caption h5, .carousel-caption p {
+    color: #fff;
+    margin: 0;
+}
+
+.divider {
+    border-color: #eee2a8;
+}
+
+
+#lista-categorias {
+    background-color: #eee2a8;
+    padding-top: 20px;
+    padding-bottom: 3px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.accordion-item {
+    background-color: #94947a;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.accordion-button {
+    background-color: #cc8533;
+    color: white;
+    font-weight: bold;
+}
+
+.accordion-button:not(.collapsed) {
+    color: #cc8533;
+    background-color: #eee2a8;
+}
+
+.accordion-body {
+    background-color: #eee2a8;
+}
+
+.productos {
+    display: flex;
+    flex-direction: column;
+}
+
+.card {
+    background-color: #cc8533;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    color: white;
+    margin-bottom: 15px;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.producto-info {
+    flex-grow: 1;
+}
+
+.producto-precio-boton {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-top: 1rem;
+}
+
+.confirmacion-agregado {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #28a745;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    font-size: 16px;
+    z-index: 1000;
+    animation: fadeInOut 2s ease forwards;
+}
+
+.btn {
+    color: white;
+    background-color: #94947a;
+    border-color: #eee2a8;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #cc8533;;
+}
+
+.btn-agregar:hover {
+    background-color: #705432 !important;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+}
+
+#estado-carrito {
+    position: sticky;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 15px;
+    color: white;
+    display: none;
+    margin-top: 8px;
+}
+
+#total-carrito {
+    font-size: 18px;
+    margin-left: 10px;
+}
+
+footer {
+    background-color: #333;
+    color: #eee2a8;
+    padding: 20px;
+    text-align: center;
+    font-size: 14px;
+    position: relative;
+    width: 100%;
+    box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+    margin-top: 8px;
+}
+
+@media (min-width: 992px) {
+    #carouselExample {
+        width: 500px;
+        margin: 10px auto;
+    }
+}
+
+@media (max-width: 576px) {
+    .productos {
+        flex-direction: column;
+    }
+
+    .card {
+        margin-bottom: 20px;
+    }
+}
+
+@keyframes fadeInOut {
+    0% { opacity: 0; transform: translateY(20px); }
+    10% { opacity: 1; transform: translateY(0); }
+    90% { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(20px); }
+}
+
+/* Ajustes para dispositivos móviles */
+@media (max-width: 768px) {
+    .carousel-item img {
+        max-height: 300px; /* Reduce la altura en pantallas móviles */
+    }
+
+    .carousel-caption h5 {
+        font-size: 1.1rem; /* Ajusta el tamaño de fuente */
+    }
+    .carousel-caption p {
+        font-size: 0.9rem;
+    }
+}
+
